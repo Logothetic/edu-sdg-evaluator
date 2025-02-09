@@ -1,0 +1,111 @@
+import { SDGSection } from "@/types/evaluation";
+
+export const sdg5Section: SDGSection = {
+  id: "SDG5",
+  name: "Gender Equality",
+  indicators: [
+    {
+      id: "I9",
+      name: "Female Academic Staff Ratio",
+      description: "Proportion of female senior academic staff",
+      weight: 0.193,
+      value: 0,
+      needsImprovement: false,
+      category: "Equality",
+      threshold: 2.25,
+      isRatio: true,
+      numerator: 0,
+      denominator: 0,
+    },
+    {
+      id: "I10",
+      name: "Gender Equality Policies",
+      description: "Assessment of gender equality policies",
+      weight: 0.257,
+      value: 0,
+      needsImprovement: false,
+      category: "Equality",
+      threshold: 2.25,
+      variables: [
+        {
+          id: "var1",
+          name: "Policy Implementation",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+        {
+          id: "var2",
+          name: "Documentation",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+        {
+          id: "var3",
+          name: "Review Process",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+      ],
+    },
+    {
+      id: "I11",
+      name: "Gender Support Programs",
+      description: "Evaluation of gender support initiatives",
+      weight: 0.427,
+      value: 0,
+      needsImprovement: false,
+      category: "Equality",
+      threshold: 2.25,
+      variables: [
+        {
+          id: "var1",
+          name: "Program Implementation",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+        {
+          id: "var2",
+          name: "Documentation",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+        {
+          id: "var3",
+          name: "Review Process",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+      ],
+    },
+    {
+      id: "I12",
+      name: "Gender Inclusivity Measures",
+      description: "Assessment of gender inclusivity measures",
+      weight: 0.123,
+      value: 0,
+      needsImprovement: false,
+      category: "Equality",
+      threshold: 2.25,
+      variables: [
+        {
+          id: "var1",
+          name: "Implementation Level",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+        {
+          id: "var2",
+          name: "Documentation",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+        {
+          id: "var3",
+          name: "Review Process",
+          value: 0,
+          possibleValues: [0, 1],
+        },
+      ],
+    },
+  ],
+};
