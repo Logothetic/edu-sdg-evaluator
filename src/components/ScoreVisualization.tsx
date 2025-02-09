@@ -1,42 +1,48 @@
 import { Progress } from "@/components/ui/progress";
 import { Card } from "@/components/ui/card";
+import { Indicator } from "@/types/evaluation";
 
 interface ScoreVisualizationProps {
   score: number;
+  indicators: Indicator[];
 }
 
 const getScoreCategory = (
-  score: number
+  indicators: Indicator[]
 ): {
   category: string;
   color: string;
   description: string;
 } => {
-  if (score >= 2.5) {
+  const passingCount = indicators.filter(
+    (ind) => (ind.value || 0) >= ind.threshold
+  ).length;
+
+  if (passingCount === indicators.length) {
     return {
       category: "Excellent",
       color: "bg-green-500",
       description: "Outstanding SDG integration across all areas",
     };
-  } else if (score >= 2.25) {
+  } else if (passingCount >= 30) {
     return {
       category: "Very Good",
       color: "bg-emerald-500",
       description: "Strong performance in most SDG criteria",
     };
-  } else if (score >= 2.0) {
+  } else if (passingCount >= 25) {
     return {
       category: "Good",
       color: "bg-blue-500",
       description: "Solid foundation with room for improvement",
     };
-  } else if (score >= 1.75) {
+  } else if (passingCount >= 20) {
     return {
       category: "Fair",
       color: "bg-yellow-500",
       description: "Meeting basic requirements, needs enhancement",
     };
-  } else if (score >= 1.5) {
+  } else if (passingCount >= 15) {
     return {
       category: "Needs Improvement",
       color: "bg-orange-500",
@@ -51,9 +57,15 @@ const getScoreCategory = (
   }
 };
 
-export const ScoreVisualization = ({ score }: ScoreVisualizationProps) => {
-  const normalizedScore = (Math.min(Math.max(score, 0), 3) / 3) * 100;
-  const { category, color, description } = getScoreCategory(score);
+export const ScoreVisualization = ({
+  score,
+  indicators,
+}: ScoreVisualizationProps) => {
+  const passingCount = indicators.filter(
+    (ind) => (ind.value || 0) >= ind.threshold
+  ).length;
+  const normalizedScore = (passingCount / indicators.length) * 100;
+  const { category, color, description } = getScoreCategory(indicators);
 
   return (
     <Card className="p-6 space-y-4">
@@ -70,10 +82,8 @@ export const ScoreVisualization = ({ score }: ScoreVisualizationProps) => {
         <div className="relative w-40 h-40">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <span className="text-4xl font-bold">
-                {normalizedScore.toFixed(1)}
-              </span>
-              <span className="text-lg">/100</span>
+              <span className="text-4xl font-bold">{passingCount}</span>
+              <span className="text-lg">/{indicators.length}</span>
             </div>
           </div>
           <Progress
@@ -95,7 +105,9 @@ export const ScoreVisualization = ({ score }: ScoreVisualizationProps) => {
         </div>
         <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className="font-semibold">Indicators</div>
-          <div className="text-2xl font-bold text-gray-900">34</div>
+          <div className="text-2xl font-bold text-gray-900">
+            {indicators.length}
+          </div>
         </div>
         <div className="text-center p-3 bg-gray-50 rounded-lg">
           <div className="font-semibold">Category</div>

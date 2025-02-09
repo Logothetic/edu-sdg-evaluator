@@ -22,7 +22,7 @@ export const ResultsDisplay = ({
 
   return (
     <div className="space-y-6">
-      <ScoreVisualization score={score} />
+      <ScoreVisualization score={score} indicators={indicators} />
 
       <Card className="p-6">
         <h3 className="text-xl font-semibold mb-4">Performance by Indicator</h3>
